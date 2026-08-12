@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { AnimateIn } from "./AnimateIn";
@@ -7,16 +7,6 @@ import {
   PHONE_DISPLAY, EMAIL, LINKEDIN_URL, UPWORK_URL, WHATSAPP_LINK,
 } from "../lib/constants";
 
-/*
-  ─── EmailJS Setup Instructions ───
-  1. Go to https://www.emailjs.com and create a free account
-  2. Add an Email Service (Gmail recommended) → copy SERVICE_ID
-  3. Create an Email Template with variables:
-       {{from_name}}, {{from_email}}, {{phone}}, {{service}}, {{message}}
-     → copy TEMPLATE_ID
-  4. Go to Account → API Keys → copy PUBLIC_KEY
-  5. Replace the three placeholder strings below
-*/
 const EMAILJS_SERVICE_ID  = "service_17h47ud";
 const EMAILJS_TEMPLATE_ID = "template_gwpgm1l";
 const EMAILJS_PUBLIC_KEY  = "AVe7YeABGWCJNufJv";
@@ -34,6 +24,11 @@ export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  /* Initialize EmailJS once on mount */
+  useEffect(() => {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }, []);
 
   const validate = (data: FormData) => {
     const e: Record<string, string> = {};
@@ -67,8 +62,7 @@ export default function Contact() {
       const result = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
+        templateParams
       );
       console.log("EmailJS success:", result);
       setStatus("success");
