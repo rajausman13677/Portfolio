@@ -30,7 +30,7 @@ export default function Navbar() {
           <div className="nav-avatar" style={{ overflow: "hidden", padding: 0 }}>
             <Image
               src="/images/img.jpeg"
-              alt="Usman Zaffar"
+              alt="Usman Zafar"
               width={40}
               height={40}
               style={{
@@ -42,7 +42,7 @@ export default function Navbar() {
           </div>
           <div className="nav-logo-text">
             <span className="nav-logo-name">USMAN</span>
-            <span className="nav-logo-name">ZAFFAR</span>
+            <span className="nav-logo-name">Zafar</span>
             <span className="nav-logo-tagline">CLIENT ACQUISITION STRATEGIST</span>
           </div>
         </a>

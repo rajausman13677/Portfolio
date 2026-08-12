@@ -22,8 +22,8 @@ const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
 
 const services = [
-  "Starter — $165 (Profile Audit & Optimisation)",
-  "Growth — $325 (Full Dual-Platform Setup)",
+  "Starter — $50 (Profile Audit & Optimisation)",
+  "Growth — $100 (Full Dual-Platform Setup)",
   "Done-For-You — Custom Retainer",
   "Not sure yet — need advice",
 ];
@@ -281,7 +281,7 @@ export default function Contact() {
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="form-row">
                       <div>
                         <label style={labelStyle}>Full Name *</label>
-                        <input name="from_name" type="text" placeholder="Usman Zaffar"
+                        <input name="from_name" type="text" placeholder="Usman Zafar"
                           style={inputStyle(!!errors.from_name)} />
                         {errors.from_name && <p style={errStyle}>{errors.from_name}</p>}
                       </div>

@@ -15,7 +15,7 @@ export default function About() {
               <div className="about-photo">
                 <Image
                   src="/images/img.jpeg"
-                  alt="Usman Zaffar"
+                  alt="Usman Zafar"
                   width={400}
                   height={400}
                   priority

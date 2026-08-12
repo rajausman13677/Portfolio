@@ -1,5 +1,5 @@
 /* =============================================
-   USMAN ZAFFAR PORTFOLIO — MASTER STYLESHEET
+   USMAN Zafar PORTFOLIO — MASTER STYLESHEET
    Pure CSS, no Tailwind dependency
    ============================================= */
 
@@ -648,8 +648,14 @@ img, svg { display: block; }
   border-radius: 24px;
   padding: 28px;
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 .masonry-item:hover { transform: translateY(-4px); }
+.masonry-item[data-type="stat"] {
+  min-height: 180px;
+  justify-content: flex-end;
+}
 .result-stat-num {
   font-size: 60px;
   font-weight: 900;
@@ -1313,6 +1319,7 @@ img, svg { display: block; }
 /* ── About ── */
 [data-theme="light"] .about-headline   { color: #0a0a0a; }
 [data-theme="light"] .about-p          { color: #555; }
+[data-theme="light"] .about-p strong   { color: #0a0a0a; }
 [data-theme="light"] .about-p-highlight { color: #0a0a0a; font-weight: 700; }
 [data-theme="light"] .about-stat-num   { color: #0a0a0a; }
 [data-theme="light"] .about-stat-label { color: #888; }
@@ -1320,6 +1327,7 @@ img, svg { display: block; }
 [data-theme="light"] .about-badge      { border-color: #f4f4f0; }
 [data-theme="light"] .about-badge-num  { color: #0a0a0a; }
 [data-theme="light"] .about-badge-label { color: #888; }
+[data-theme="light"] .about-initials   { color: #0a0a0a; }
 
 /* ── Services (already light) ── */
 [data-theme="light"] .services-section { background: #f4f4f0; }

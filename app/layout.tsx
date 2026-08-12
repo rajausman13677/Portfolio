@@ -11,11 +11,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Usman Zaffar — LinkedIn & Upwork Business Developer",
+  title: "Usman Zafar — LinkedIn & Upwork Business Developer",
   description:
-    "Usman Zaffar helps freelancers and consultants win more clients on LinkedIn and Upwork through profile optimisation, outreach systems, and lead generation strategy.",
+    "Usman Zafar helps freelancers and consultants win more clients on LinkedIn and Upwork through profile optimisation, outreach systems, and lead generation strategy.",
   keywords: [
-    "Usman Zaffar",
+    "Usman Zafar",
     "LinkedIn business development",
     "Upwork profile optimisation",
     "lead generation",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "client acquisition",
   ],
   openGraph: {
-    title: "Usman Zaffar — LinkedIn & Upwork Business Developer",
+    title: "Usman Zafar — LinkedIn & Upwork Business Developer",
     description: "Win more clients on LinkedIn and Upwork. Proven systems, real results.",
     type: "website",
   },

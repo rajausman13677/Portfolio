@@ -4,7 +4,7 @@ import { WHATSAPP_LINK } from "../lib/constants";
 
 const packages = [
   {
-    name: "Starter", price: "$165", period: "one-time", popular: false, cta: "Get Started",
+    name: "Starter", price: "$50", period: "one-time", popular: false, cta: "Get Started",
     description: "For freelancers and consultants who need a strong foundation on LinkedIn or Upwork to start attracting clients.",
     features: [
       "Full LinkedIn or Upwork profile audit",
@@ -16,7 +16,7 @@ const packages = [
     ],
   },
   {
-    name: "Growth", price: "$325", period: "one-time", popular: true, cta: "Get Started",
+    name: "Growth", price: "$100", period: "one-time", popular: true, cta: "Get Started",
     description: "For professionals serious about building a consistent pipeline of inbound leads and high-value contracts.",
     features: [
       "Everything in Starter",

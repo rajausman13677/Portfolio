@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import HeroBackground from "./HeroBackground";
-import { WHATSAPP_LINK } from "../lib/constants";
+import { WHATSAPP_LINK, LINKEDIN_URL, UPWORK_URL } from "../lib/constants";
 
 const specialties = [
   "LinkedIn profile optimisation & personal branding",
@@ -128,20 +128,37 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.32, ease }}
             >
               {[
-                { label: "LinkedIn", color: "#0077b5", icon: "in" },
-                { label: "Upwork",   color: "#14a800", icon: "up" },
+                { label: "LinkedIn", color: "#0077b5", icon: "in", href: LINKEDIN_URL },
+                { label: "Upwork",   color: "#14a800", icon: "up", href: UPWORK_URL },
               ].map(p => (
-                <span key={p.label} style={{
-                  display: "inline-flex", alignItems: "center", gap: 7,
-                  background: "var(--hero-badge-bg, rgba(255,255,255,0.06))",
-                  border: "1px solid var(--hero-badge-border, rgba(255,255,255,0.12))",
-                  borderRadius: 8,
-                  padding: "6px 14px",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: "var(--hero-text, #fff)",
-                  letterSpacing: "0.02em",
-                }}>
+                <a
+                  key={p.label}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: 7,
+                    background: "var(--hero-badge-bg, rgba(255,255,255,0.06))",
+                    border: "1px solid var(--hero-badge-border, rgba(255,255,255,0.12))",
+                    borderRadius: 8,
+                    padding: "6px 14px",
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: "var(--hero-text, #fff)",
+                    letterSpacing: "0.02em",
+                    textDecoration: "none",
+                    transition: "border-color 0.2s, transform 0.15s",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = p.color;
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "var(--hero-badge-border, rgba(255,255,255,0.12))";
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                  }}
+                >
                   <span style={{
                     width: 20, height: 20, borderRadius: 4,
                     background: p.color,
@@ -152,7 +169,7 @@ export default function Hero() {
                     {p.icon}
                   </span>
                   {p.label}
-                </span>
+                </a>
               ))}
               <span style={{
                 fontSize: 13, fontWeight: 500, color: "#8a8a8a",

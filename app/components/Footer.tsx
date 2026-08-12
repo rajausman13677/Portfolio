@@ -104,7 +104,7 @@ export default function Footer() {
                 UZ<span className="footer-bright-brand-dot" />
               </div>
               <p className="footer-bright-brand-desc">
-                Usman Zaffar — LinkedIn &amp; Upwork strategist helping
+                Usman Zafar — LinkedIn &amp; Upwork strategist helping
                 freelancers and consultants land consistent, high-value clients.
               </p>
               <div className="footer-bright-socials">
@@ -152,7 +152,7 @@ export default function Footer() {
           <AnimateIn delay={0.3}>
             <div className="footer-bright-bottom">
               <p className="footer-bright-copy">
-                © {new Date().getFullYear()} Usman Zaffar. All rights reserved.
+                © {new Date().getFullYear()} Usman Zafar. All rights reserved.
               </p>
               <div className="footer-bright-bottom-links">
                 <a href="#" className="footer-bright-bottom-link">Privacy Policy</a>

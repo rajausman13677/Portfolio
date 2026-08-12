@@ -63,6 +63,7 @@ export default function Results() {
               <div
                 className="masonry-item"
                 data-dark={String(!item.dark)}
+                data-type={item.type}
                 style={{ background: item.bg, boxShadow: "0 4px 24px rgba(0,0,0,0.25)" }}
               >
 
