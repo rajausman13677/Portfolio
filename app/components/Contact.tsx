@@ -37,10 +37,10 @@ export default function Contact() {
 
   const validate = (data: FormData) => {
     const e: Record<string, string> = {};
-    if (!data.get("from_name"))    e.from_name  = "Name is required.";
-    if (!data.get("from_email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.get("from_email"))))
-                                   e.from_email = "Valid email is required.";
-    if (!data.get("message"))      e.message    = "Please tell me a bit about your goals.";
+    if (!data.get("name"))    e.name  = "Name is required.";
+    if (!data.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.get("email"))))
+                              e.email = "Valid email is required.";
+    if (!data.get("message")) e.message = "Please tell me a bit about your goals.";
     return e;
   };
 
@@ -275,21 +275,23 @@ export default function Contact() {
                 </motion.div>
               ) : (
                 <form ref={formRef} onSubmit={handleSubmit} noValidate>
+                  {/* Hidden time field — populates {{time}} in EmailJS template */}
+                  <input type="hidden" name="time" value={new Date().toLocaleString("en-PK", { dateStyle: "full", timeStyle: "short" })} readOnly />
                   <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
 
                     {/* Name + Email row */}
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} className="form-row">
                       <div>
                         <label style={labelStyle}>Full Name *</label>
-                        <input name="from_name" type="text" placeholder="Usman Zafar"
-                          style={inputStyle(!!errors.from_name)} />
-                        {errors.from_name && <p style={errStyle}>{errors.from_name}</p>}
+                        <input name="name" type="text" placeholder="Usman Zafar"
+                          style={inputStyle(!!errors.name)} />
+                        {errors.name && <p style={errStyle}>{errors.name}</p>}
                       </div>
                       <div>
                         <label style={labelStyle}>Email Address *</label>
-                        <input name="from_email" type="email" placeholder="you@example.com"
-                          style={inputStyle(!!errors.from_email)} />
-                        {errors.from_email && <p style={errStyle}>{errors.from_email}</p>}
+                        <input name="email" type="email" placeholder="you@example.com"
+                          style={inputStyle(!!errors.email)} />
+                        {errors.email && <p style={errStyle}>{errors.email}</p>}
                       </div>
                     </div>
 
