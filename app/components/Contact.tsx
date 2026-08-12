@@ -1,7 +1,6 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import { AnimateIn } from "./AnimateIn";
 import {
   PHONE_DISPLAY, EMAIL, LINKEDIN_URL, UPWORK_URL, WHATSAPP_LINK,
@@ -25,11 +24,6 @@ export default function Contact() {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  /* Initialize EmailJS once on mount */
-  useEffect(() => {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-  }, []);
-
   const validate = (data: FormData) => {
     const e: Record<string, string> = {};
     if (!data.get("name"))    e.name  = "Name is required.";
@@ -52,23 +46,36 @@ export default function Contact() {
     const templateParams = {
       name:    data.get("name")    as string,
       email:   data.get("email")   as string,
-      phone:   data.get("phone")   as string || "Not provided",
-      service: data.get("service") as string || "Not specified",
+      phone:   (data.get("phone")   as string) || "Not provided",
+      service: (data.get("service") as string) || "Not specified",
       message: data.get("message") as string,
       time:    new Date().toLocaleString("en-PK", { dateStyle: "full", timeStyle: "short" }),
     };
 
     try {
-      const result = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams
-      );
-      console.log("EmailJS success:", result);
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id:      EMAILJS_SERVICE_ID,
+          template_id:     EMAILJS_TEMPLATE_ID,
+          user_id:         EMAILJS_PUBLIC_KEY,
+          template_params: templateParams,
+        }),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error("EmailJS error:", res.status, errText);
+        setStatus("error");
+        return;
+      }
+
+      console.log("EmailJS success: 200 OK");
       setStatus("success");
       formRef.current.reset();
     } catch (err) {
-      console.error("EmailJS error:", err);
+      console.error("Network error:", err);
       setStatus("error");
     }
   };
