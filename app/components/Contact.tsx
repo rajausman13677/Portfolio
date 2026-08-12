@@ -17,9 +17,9 @@ import {
   4. Go to Account → API Keys → copy PUBLIC_KEY
   5. Replace the three placeholder strings below
 */
-const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID  = "service_17h47ud";
+const EMAILJS_TEMPLATE_ID = "template_gwpgm1l";
+const EMAILJS_PUBLIC_KEY  = "AVe7YeABGWCJNufJv";
 
 const services = [
   "Starter — $50 (Profile Audit & Optimisation)",
