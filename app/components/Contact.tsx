@@ -54,16 +54,27 @@ export default function Contact() {
     setErrors({});
     setStatus("sending");
 
+    const templateParams = {
+      name:    data.get("name")    as string,
+      email:   data.get("email")   as string,
+      phone:   data.get("phone")   as string || "Not provided",
+      service: data.get("service") as string || "Not specified",
+      message: data.get("message") as string,
+      time:    new Date().toLocaleString("en-PK", { dateStyle: "full", timeStyle: "short" }),
+    };
+
     try {
-      await emailjs.sendForm(
+      const result = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        formRef.current,
+        templateParams,
         EMAILJS_PUBLIC_KEY
       );
+      console.log("EmailJS success:", result);
       setStatus("success");
       formRef.current.reset();
-    } catch {
+    } catch (err) {
+      console.error("EmailJS error:", err);
       setStatus("error");
     }
   };
