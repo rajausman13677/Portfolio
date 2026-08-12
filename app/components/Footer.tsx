@@ -3,6 +3,10 @@ import { useState } from "react";
 import { AnimateIn, Stagger, StaggerItem } from "./AnimateIn";
 import { EMAIL, PHONE_DISPLAY, LINKEDIN_URL, UPWORK_URL, WHATSAPP_LINK } from "../lib/constants";
 
+const EMAILJS_SERVICE_ID  = "service_17h47ud";
+const EMAILJS_TEMPLATE_ID = "template_gwpgm1l";
+const EMAILJS_PUBLIC_KEY  = "AVe7YeABGWCJNufJv";
+
 const footerLinks = {
   Work: [
     { label: "Case Studies",  href: "#work-grid",  external: false },
@@ -27,17 +31,53 @@ const footerLinks = {
 export default function Footer() {
   const [email,     setEmail]     = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [sending,   setSending]   = useState(false);
   const [error,     setError]     = useState("");
 
-  const subscribe = (e: React.FormEvent) => {
+  const subscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Please enter a valid email address.");
       return;
     }
-    setSubmitted(true);
     setError("");
-    setEmail("");
+    setSending(true);
+
+    try {
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id:  EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id:     EMAILJS_PUBLIC_KEY,
+          template_params: {
+            name:    "Newsletter Subscriber",
+            email:   email,
+            phone:   "N/A",
+            service: "Newsletter Subscription",
+            message: `New newsletter subscriber: ${email}`,
+            time:    new Date().toLocaleString("en-PK", { dateStyle: "full", timeStyle: "short" }),
+          },
+        }),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error("Newsletter EmailJS error:", res.status, errText);
+        setError("Something went wrong. Please try again.");
+        setSending(false);
+        return;
+      }
+
+      setSubmitted(true);
+      setEmail("");
+    } catch (err) {
+      console.error("Newsletter network error:", err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -86,8 +126,21 @@ export default function Footer() {
                         aria-label="Email for newsletter"
                         className="footer-bright-input"
                       />
-                      <button type="submit" className="btn btn-dark" style={{ flexShrink: 0 }}>
-                        Subscribe
+                      <button
+                        type="submit"
+                        disabled={sending}
+                        className="btn btn-dark"
+                        style={{ flexShrink: 0, opacity: sending ? 0.7 : 1 }}
+                      >
+                        {sending ? (
+                          <>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                              style={{ animation: "spin 1s linear infinite" }}>
+                              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                            </svg>
+                            Sending...
+                          </>
+                        ) : "Subscribe"}
                       </button>
                     </div>
                     {error && <p style={{ color: "#e53e3e", fontSize: 12, marginTop: 6, paddingLeft: 4 }}>{error}</p>}

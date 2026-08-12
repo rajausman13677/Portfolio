@@ -1576,3 +1576,6 @@ img, svg { display: block; }
   transition: color 0.2s;
 }
 .footer-bright-bottom-link:hover { color: #0a0a0a; }
+
+/* Spin animation for loading buttons */
+@keyframes spin { to { transform: rotate(360deg); } }
