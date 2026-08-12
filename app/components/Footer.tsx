@@ -51,8 +51,14 @@ export default function Footer() {
               <div>
                 <p className="footer-bright-label">STAY IN THE LOOP</p>
                 <h3 className="footer-bright-nl-headline">
-                  LINKEDIN & UPWORK{" "}
-                  <span style={{ color: "#0a0a0a", textDecoration: "underline", textDecorationColor: "#c6ff3d", textDecorationThickness: 4, textUnderlineOffset: 6 }}>
+                  LINKEDIN &amp; UPWORK{" "}
+                  <span style={{
+                    color: "#c6ff3d",
+                    textDecoration: "underline",
+                    textDecorationColor: "#c6ff3d",
+                    textDecorationThickness: 3,
+                    textUnderlineOffset: 6,
+                  }}>
                     GROWTH TIPS
                   </span>
                 </h3>
